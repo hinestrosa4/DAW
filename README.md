@@ -11,6 +11,6 @@ Este repositorio incluye actividades llevadas a cabo en el módulo DAW
 
 |Ejercicios|Descipcion|
 |----------|----------|
-|Ejercicios Scripts|Crear Scripts para modificar diferentes archivos|
+|[Ejercicios Scripts](Tema1/)|Crear Scripts para modificar diferentes archivos|
 
 
