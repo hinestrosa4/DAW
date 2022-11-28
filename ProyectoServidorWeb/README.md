@@ -234,6 +234,191 @@ Ya tendriamos nuestra página web en WordPress operativa
 
 ![wordpress5](images/41.png)
 
+### 3. Instalación y Configuración de Python en Apache
+
+Para instalar Python en nuestro servidor Apache deberemos instalar unas librerias wsgi
+
+```bash
+sudo apt install libapache2-mod-wsgi-py3
+```
+
+
+
+Una vez instalado, habilitamos el módulo wsgi
+
+```bash
+a2enmod wsgi
+```
+
+&ensp;&ensp; **3.1. Aplicación Python en página web Apache**
+
+Para realizar esto, vamos a necesitar el modulo mod_wsgi anteriormente habilitado, por si no tenemos Python instaaldo en nuestro servidor, ejecutaremos el siguiente comando
+
+```bash
+sudo apt install python3 libexpat1 -y
+```
+Una vez listo, vamos a iinstalar los paquetes necesarios
+
+```bash
+sudo apt install apache2 apache2-utils ssl-cert libapache2-mod-wsgi-py3 -y
+```
+
+Cuando tengamos todo listo, podemos crear el codigo de nuestrao archivo python, en mi caso lo llamaré **app.py**
+
+```bash
+sudo nano /var/www/html/pagPython/app.py
+```
+
+Tendrá el siguiente contenido
+
+```python
+def application(environ, start_response):
+    status = '200 OK'
+    output = b'Pagina de Rafael Hinestrosa'
+    response_headers = [('Content-type', 'text/plain'),
+                        ('Content-Length', str(len(output)))]
+    start_response(status, response_headers)
+    return [output]
+```
+
+Ahora le asignaremos los permisos necesarios para ser ejecutada
+
+```bash
+sudo chown www-data:www-data /var/www/html/pagPython/app.py
+sudo chmod 775 /var/www/html/pagPython/app.py
+```
+
+A continuación, pasaremos a configurar wsgi creando un nuevo virtual host en nuestro servidor, para ello, copiaremos el contenido del archivo **000-default.conf**
+
+```bash
+cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/pagPython.conf
+```
+
+Además de todo su contenido, adicionalmente añadiremos las siguiente lineas, dependiendo de las rutas que tengamos
+
+```apache
+ServerName departamentos.centro.intranet
+ServerAlias departamentos.centro.intranet
+DocumentRoot /var/www/html/pagPython/
+WSGIScriptAlias /appPython /var/www/html/pagPython/app.py
+```
+
+Cuando hayamos editado el fichero, reiniciamos el servidor web
+
+```bash
+systemctl restart apache2
+```
+
+Ya podemos acceder a nuestro dominio: http://departamentos.centro.intranet/appPython
+
+![python1](images/python1.png)
+
+&ensp;&ensp; **3.2. Proteger el acceso a la aplicación Python con Autenticación**
+
+Para crear una autenticación en la aplicacion Python, debemos crear un usuario con su contraseña, para ello ejecutamos el siguiente comando
+
+```bash
+htpasswd -c /etc/apache2/.htpasswd rafa
+```
+
+Cuando hayamos creado el usuario, accedemos a nuestro archivo de configuración **pagPython.conf** y añadimos las siguientes lineas
+
+```apache
+<Directory /var/www/html/pagPython>
+    AuthType Basic
+    AuthName "Area de Seguridad - Autenticación requerida"
+    AuthUserFile /etc/apache2/.htpasswd
+    Require user rafa rafa123
+</Directory>
+```
+
+Reiniciamos nuestro servidor
+
+```bash
+systemctl restart apache2
+```
+
+Accedemos a la página web de Python y nos debe saltar un autenticación
+
+![python2](images/python2.png)
+
+Y ya podriamos acceder al contenido de la página
+
+![python3](images/python3.png)
+
+### 4. Instalación y Configuración de AWStats
+
+Vamos a instalar el paquete AWStats
+
+```bash
+sudo apt install awstats
+```
+
+Activamos el módulo necesario de **CGI** en Apache
+
+```bash
+a2enmod cgi
+```
+
+Vamos a crear un archivo de configuración para nuestra web de WordPress cuyo dominio es **centro.intranet**
+
+```bash
+sudo cp /etc/awstats/awstats.conf /etc/awstats.centro.intranet.conf
+```
+
+Abrimos el fichero que hemos copiado
+
+```bash
+sudo nano /etc/awstats.centro.intranet.conf
+```
+
+Ponemos nuestro nombre de dominio en el apartado de **SiteDomain**
+
+```apache
+SiteDomain="centro.intranet"
+```
+
+Cambiamos también el nombre de dominio del sitio web en el apartado de **HostAliases**
+
+```apache
+HostAliases="www.centro.intranet localhost 127.0.0.1"
+```
+
+Cambiamos el 0 por el 1 en el apartado de **AllowToUpdateStatsFromBrowser**. Esto permite que la página agregue un botón de recarga para actualizar las estadísticas
+
+```apache
+AllowToUpdateStatsFromBrowser=1
+```
+
+Debemos construir las estadísticas iniciales que se generan a partir de los registros actuales de nuestro servidor
+
+```bash
+sudo /usr/lib/cgi-bin/awstats.pl -config=centro.intranet -update
+```
+
+Vamos a copiar las estadísticas en el directorio de apache para que nos lo pueda mostrar.
+
+```bash
+sudo cp -r /usr/lib/cgi-bin /var/www/html/
+```
+
+Asignamos los siguientes permisos
+
+```bash
+sudo chown www-data:www-data /var/www/html/cgi-bin/
+sudo chmod -R 755 /var/www/html/cgi-bin/
+```
+
+Una vez realizado estos pasos, ya tendriamos AWStats funcionando correctamente. Para acceder a él, en mi caso, localhost/cgi-bin
+
+![awstats](images/52.png)
+
+Por último, vamos a crear una tarea con contrab para que las estadísticas se actualicen regularmente. Accedemos a el fichero **/etc/crontab** y ponemos la siguiente linea
+
+```apache
+*/10 * * * * * root /usr/lib/cgi-bin/awstats.pl -config=test.com -update
+```
+
 
 
 
