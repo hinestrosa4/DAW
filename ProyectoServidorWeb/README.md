@@ -191,9 +191,7 @@ A continuación, vamos a generar unas claves necesarias para ponerlas en un arch
 curl -s https://api.wordpress.org/secret-key/1.1/salt/
 ```
 
-
-```apache
-root@rafa:/tmp# curl -s https://api.wordpress.org/secret-key/1.1/salt/ 
+```bash
 define('AUTH_KEY','XCg6.;1>5A@w!%?:M[+.;SyD?U030|iv^*]D2dR-`@GL82_C*Yv^$aQ6}dg)IeFi');
 define('SECURE_AUTH_KEY','G=vlH7{ZBy6!7(PJ{S4<F~Doo_wS67]4,sN;-k@&-R%QWa$/SHr|BEZDGm;5LC~#');
 define('LOGGED_IN_KEY','$[Cooii&tfwggfy+]#JT8I;;oh9u*CQTDwTazhzn[9]mfBu,@YR]bz!0]W|Swsx');
@@ -203,4 +201,43 @@ define('SECURE_AUTH_SALT','F>E!OTTZ-5T+Qj4+15r?huI(>CS@vin]tj1zSr0*TAtn~Zzk:SB3+
 define('LOGGED_IN_SALT','pa^5zh1/[k=[N{57*KjiP4esb-UtGpV*ziVk-d,3loJ[m]u;u%7k#xPR%Pb+N((');
 define('NONCE_SALT','04M1C(0;010;jhXj(;4p5zx0s;;az^D00;P91Ycwuez'sh@&c<0)[_AP7B$!t8');
 ```
+
+Vamos a configurar el fichero **wp-config.php** y ponemos los datos de la base de datos creada anteriormente
+
+```bash
+define('DB_NAME','wordpress');
+define('DB_USER','wordpressuser');
+define('DB_PASSWORD','123');
+define('DB_HOST','localhost');
+```
+
+Copiamos las claves que hemos generado automaticamente en el archivo. Por último, añadimos al final del fichero la siguiente linea
+
+```bash
+define('FS_METHOD','direct');
+```
+
+Ya tendriamos WordPress instalado en nuestro servidor web Apache, para acceder a él, en mi caso, accedemos a http://centro.intranet
+
+![wordpress1](images/37.png)
+
+Cuando seleccionemos un lenguaje y demos en continuar, nos mandará a otra página donde tendremos que introducir un titulo para nuestro sitio, un nombre de usuario, una contraseña y un correo electrónico. Una vez introducido los datos, pulsamos en **Instalar WordPress**
+
+![wordpress2](images/38.png)
+![wordpress3](images/39.png)
+
+La siguiente página que veremos es el login de Wordpress donde introduciendo los datos anteriores deberemos acceder a nuestro panel de configuración de la página
+
+![wordpress4](images/40.png)
+
+Ya tendriamos nuestra página web en WordPress operativa
+
+![wordpress5](images/41.png)
+
+
+
+
+
+
+
 
