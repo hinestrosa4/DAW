@@ -19,6 +19,15 @@
 
 **5.** [**Instalación Servidor Nginx**](#id10)
 
+&ensp;&ensp; **5.1.** [**Instalación del Servidor Nginx**](#id11)
+
+&ensp;&ensp; **5.2.** [**Cambiar puerto del servidor Nginx**](#id12)
+
+&ensp;&ensp; **5.3** [**Instalación de phpmyadmin**](#id13)
+
+
+
+
 # PROYECTO SERVIDOR WEB
 
 ### <a name="id1">1. Instalación del servidor web apache. Usaremos dos dominios mediante el archivo hosts: centro.intranet y departamentos.centro.intranet. El primero servirá el contenido mediante wordpress y el segundo una aplicación en Python</a>
@@ -442,7 +451,7 @@ Por último, vamos a crear una tarea con contrab para que las estadísticas se a
 
 ### <a name="id10">5. Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.</a>
 
-&ensp;&ensp; <a name="i11">**5.1. Instalación del Servidor Nginx**</a>
+&ensp;&ensp; <a name="id11">**5.1. Instalación del Servidor Nginx**</a>
 
 Para instalar un servidor Nginx debemos ejecutar el siguiente comando
 
@@ -460,7 +469,7 @@ Accedemos a localhost y deberiamos tener un pantalla como esta
 
 ![nginx1](images/56.png)
 
-&ensp;&ensp; <a name="i12">**5.2. Cambiar puerto del servidor Nginx**</a>
+&ensp;&ensp; <a name="id12">**5.2. Cambiar puerto del servidor Nginx**</a>
 
 Para cambiar el puerto de escucha de nuestro servidor debemos acceder a **/etc/nginx/sites-availables/default**
 
@@ -486,7 +495,7 @@ Ahora podemos acceder a nuestro servidor, en mi caso, con http://servidor2.centr
 
 ![nginx3](images/60.png)
 
-&ensp;&ensp; <a name="i13">**5.3. Instalación de phpmyadmin**</a>
+&ensp;&ensp; <a name="id13">**5.3. Instalación de phpmyadmin**</a>
 
 Vamos a instalar algunas librerias necesarias de php necesarias
 
@@ -571,16 +580,3 @@ Ahora podemos entrar en phpmyadmin con la cuenta que acabamos de crear
 Ya podemos acceder dentro de phpmyadmin 
 
 ![phpmyadmin7](images/71.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
