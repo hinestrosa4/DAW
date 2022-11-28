@@ -1,8 +1,28 @@
+# Índice
+**1.** [**Instalación Servidor Apache y Diferentes Dominios**](#id1)
+
+&ensp;&ensp; **1.1.** [**Instalación Servidor Apache**](#id2)
+
+&ensp;&ensp; **1.2.** [**Instalación de MySql y PHP**](#id3)
+
+&ensp;&ensp; **1.3.** [**Configurar Dominios**](#id4)
+
+**2.** [**Instalación y Configuración de WordPress**](#id5)
+
+**3.** [**Instalación y Configuración de Python en Apache**](#id6)
+
+&ensp;&ensp; **3.1.** [**Aplicación Python en página web Apache**](#id7)
+
+&ensp;&ensp; **3.2.** [**Proteger el acceso a la aplicación Python con Autenticación**](#id8)
+
+**4.** [**Instalación y Configuración de AWStats**](#id9)
+
+
 # PROYECTO SERVIDOR WEB
 
-### 1. Instalación del servidor web apache. Usaremos dos dominios mediante el archivo hosts: centro.intranet y departamentos.centro.intranet. El primero servirá el contenido mediante wordpress y el segundo una aplicación en Python
+### <a name="id1">1. Instalación del servidor web apache. Usaremos dos dominios mediante el archivo hosts: centro.intranet y departamentos.centro.intranet. El primero servirá el contenido mediante wordpress y el segundo una aplicación en Python</a>
 
-&ensp;&ensp; **1.1. Instalación Servidor Web Apache**
+&ensp;&ensp; <a name="id2">**1.1. Instalación Servidor Web Apache**</a>
 
 Antes de empezar a instalar nuestro servidor web Apache, debemos actualizar el sistema, para ello usamos estas dos simples instrucciones.
 ```bash
@@ -21,7 +41,7 @@ Vemos que podemos entrar sin ningún tipo de problema.
 
 ![CheckApache](images/3.png)
 
-&ensp;&ensp; **1.2. Instalación de MySql y PHP**
+&ensp;&ensp; <a name="id3">**1.2. Instalación de MySql y PHP**</a>
 
 Para instalar MySql vamos a ejecutar el siguiente comando
 ```bash
@@ -43,7 +63,7 @@ Comprobamos que se ha instalado correctamente viendo la version de PHP que hemos
 php -v
 ```
 
-&ensp;&ensp; **1.3. Configurar Dominios**
+&ensp;&ensp; <a name="id4">**1.3. Configurar Dominios**</a>
 
 Para crear un dominio tenemos que dirigirnos al fichero **/etc/hosts**, una vez ahí, debemos poner nuestra ip local y el nombre del dominio que queremos crear, como en el siguiente ejemplo
 
@@ -53,7 +73,7 @@ sudo nano /etc/hosts
 
 ![/etc/hosts](images/8.png)
 
-### 2. Instala y Configura Wordpress
+### <a name="id5">2. Instalación y Configuración de WordPress</a>
 
 Para la instalación correcta de Wordpress, tenemos que dirigirnos **/var/www/html/**, una vez dentro, debemos crear un directorio donde se va almacenar nuestra página de Wordpress
 
@@ -234,7 +254,7 @@ Ya tendriamos nuestra página web en WordPress operativa
 
 ![wordpress5](images/41.png)
 
-### 3. Instalación y Configuración de Python en Apache
+### <a name="id6">3. Instalación y Configuración de Python en Apache</a>
 
 Para instalar Python en nuestro servidor Apache deberemos instalar unas librerias wsgi
 
@@ -250,7 +270,7 @@ Una vez instalado, habilitamos el módulo wsgi
 a2enmod wsgi
 ```
 
-&ensp;&ensp; **3.1. Aplicación Python en página web Apache**
+&ensp;&ensp; <a name="id7">**3.1. Aplicación Python en página web Apache**</a>
 
 Para realizar esto, vamos a necesitar el modulo mod_wsgi anteriormente habilitado, por si no tenemos Python instaaldo en nuestro servidor, ejecutaremos el siguiente comando
 
@@ -313,7 +333,7 @@ Ya podemos acceder a nuestro dominio: http://departamentos.centro.intranet/appPy
 
 ![python1](images/python1.png)
 
-&ensp;&ensp; **3.2. Proteger el acceso a la aplicación Python con Autenticación**
+&ensp;&ensp; <a name="id8">**3.2. Proteger el acceso a la aplicación Python con Autenticación**</a>
 
 Para crear una autenticación en la aplicacion Python, debemos crear un usuario con su contraseña, para ello ejecutamos el siguiente comando
 
@@ -346,7 +366,7 @@ Y ya podriamos acceder al contenido de la página
 
 ![python3](images/python3.png)
 
-### 4. Instalación y Configuración de AWStats
+### <a name="id9">4. Instalación y Configuración de AWStats</a>
 
 Vamos a instalar el paquete AWStats
 
