@@ -17,6 +17,7 @@
 
 **4.** [**Instalación y Configuración de AWStats**](#id9)
 
+**5.** [**Instalación Servidor Nginx**](#id10)
 
 # PROYECTO SERVIDOR WEB
 
@@ -438,6 +439,84 @@ Por último, vamos a crear una tarea con contrab para que las estadísticas se a
 ```apache
 */10 * * * * * root /usr/lib/cgi-bin/awstats.pl -config=test.com -update
 ```
+
+### <a name="id10">5. Instala un segundo servidor de tu elección (nginx, lighttpd) bajo el dominio “servidor2.centro.intranet”. Debes configurarlo para que sirva en el puerto 8080 y haz los cambios necesarios para ejecutar php. Instala phpmyadmin.</a>
+
+&ensp;&ensp; <a name="i11">**5.1. Instalación del Servidor Nginx**</a>
+
+Para instalar un servidor Nginx debemos ejecutar el siguiente comando
+
+```bash
+sudo apt install nginx
+```
+
+Para comprobar que lo hemos instalado correctamente ejecutamos
+
+```bash
+systemctl status nginx
+```
+
+Accedemos a localhost y deberiamos tener un pantalla como esta
+
+![nginx1](images/56.png)
+
+&ensp;&ensp; <a name="i12">**5.2. Cambiar puerto del servidor Nginx**</a>
+
+Para cambiar el puerto de escucha de nuestro servidor debemos acceder a **/etc/nginx/sites-availables/default**
+
+```bash
+sudo nano /etc/nginx/sites-availables/default
+```
+
+En las dos lineas donde de **Listen** cambiamos el puerto por defecto, 80, al puerto 8080
+
+![nginx2](images/57.png)
+
+Reiniciamos el servidor Nginx
+
+```bash
+systemctl restart nginx
+```
+
+Por último, vamos a asignarle un dominio a nuestro servidor para poder acceder más facilmente y bajo un nombre de dominio
+
+![nginx3](images/59.png)
+
+Ahora podemos acceder a nuestro servidor, en mi caso, con http://servidor2.centro.intranet:8080
+
+![nginx3](images/60.png)
+
+&ensp;&ensp; <a name="i13">**5.3. Instalación de phpmyadmin**</a>
+
+Vamos a instalar algunas librerias necesarias de php necesarias
+
+```bash
+sudo apt install php libapache2-mod-php php-mysql
+```
+
+Verficamos que php se insalo correctamente
+
+```bash
+php -v
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
