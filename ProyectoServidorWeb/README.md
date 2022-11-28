@@ -580,3 +580,5 @@ Ahora podemos entrar en phpmyadmin con la cuenta que acabamos de crear
 Ya podemos acceder dentro de phpmyadmin 
 
 ![phpmyadmin7](images/71.png)
+
+**Siguiendo estos pasos ya tendrías el proyecto hecho correctamente!!**
