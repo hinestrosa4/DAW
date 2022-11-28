@@ -1,4 +1,4 @@
-# Índice
+# 📜 Índice 📜
 **1.** [**Instalación Servidor Apache y Diferentes Dominios**](#id1)
 
 &ensp;&ensp; **1.1.** [**Instalación Servidor Apache**](#id2)
@@ -28,7 +28,7 @@
 
 
 
-# PROYECTO SERVIDOR WEB
+# 🌐 PROYECTO SERVIDOR WEB 🌐
 
 ### <a name="id1">1. Instalación del servidor web apache. Usaremos dos dominios mediante el archivo hosts: centro.intranet y departamentos.centro.intranet. El primero servirá el contenido mediante wordpress y el segundo una aplicación en Python</a>
 
@@ -581,4 +581,4 @@ Ya podemos acceder dentro de phpmyadmin
 
 ![phpmyadmin7](images/71.png)
 
-**Siguiendo estos pasos ya tendrías el proyecto hecho correctamente!!**
+**👉Siguiendo estos pasos ya tendrías el proyecto hecho correctamente!!👈**
