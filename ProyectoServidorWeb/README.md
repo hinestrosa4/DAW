@@ -494,24 +494,83 @@ Vamos a instalar algunas librerias necesarias de php necesarias
 sudo apt install php libapache2-mod-php php-mysql
 ```
 
-Verficamos que php se insalo correctamente
+Verficamos que php se instaló correctamente
 
 ```bash
 php -v
 ```
 
+Ahora sí podemos instalar phpmyadmin
 
+```bash
+apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
+```
 
+Nos saltará una pantalla de configuración de paquetes por si queremos reinstalar la base de datos para phpmyadmin
 
+**Pulsamos SI**
 
+![phpmyadmin1](images/64.png)
 
+Asignamos una contraseña para phpmyadmin
 
+![phpmyadmin2](images/65.png)
 
+Por último, hay que configurar el arhcivo de configuración de phpmyadmin **/var/www/phpmyadmin/config.inc.php**, pero antes de eso vamos a ejecutar un comando para obtener una clave necesaria
 
+```bash
+openssl rand -base64 32
+```
 
+Ahora si, entramos en el archivo de configuración
 
+```bash
+sudo nano /var/www/phpmyadmin/config.inc.php
+```
 
+Editamos los parámetros **blowfish_secret** y **Servers**. En el primer parámetro pegamos la clave que hemos generado anteriormente y en el segundo ponemos localhost
 
+![phpmyadmin3](images/67.png)
+
+Como nuestro servidor Nginx trabaja en el puerto 8080, vamos a asignarle a phpmyadmin el mismo puerto, para ello, accedemos a su archivo de configuración **/etc/nginx/sites-available/phpmyadmin**
+
+```bash
+sudo nano /etc/nginx/sites-available/phpmyadmin
+```
+
+Cambiamos el puerto por defecto 80 a 8080 y en **server_name** ponemos nuestro nombre de dominio, que en mi caso es **servidor2.centro.intranet**
+
+![phpmyadmin4](images/68.png)
+
+Ahora si accedemos a http://servidor2.centro.intranet:8080 debe salirnos el login de phpmyadmin. 
+
+![phpmyadmin5](images/69.png)
+
+Ahí debemos poner el usuario y contraseña que vamos a crear a continuación. Accedemos a mysql
+
+```mysql
+CREATE USER 'PMAUSER'@'localhost' IDENTIFIED BY '12345';
+```
+
+Asignamos al usuario creado los privilegios necesarios
+
+```mysql
+GRANT ALL PRIVILEGES ON *.* TO 'PMAUSER'@'localhost';
+```
+
+Ya podemos salir de mysql
+
+```mysql
+exit
+```
+
+Ahora podemos entrar en phpmyadmin con la cuenta que acabamos de crear
+
+![phpmyadmin6](images/70.png)
+
+Ya podemos acceder dentro de phpmyadmin 
+
+![phpmyadmin7](images/71.png)
 
 
 
